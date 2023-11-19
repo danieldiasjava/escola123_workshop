@@ -18,4 +18,9 @@ public class AlunosService {
 		return alunosRepository.findAll();
 	}
 
+	public Alunos insert(Alunos alunosObj) {
+	
+		return alunosRepository.save(alunosObj);
+	}
+
 }
