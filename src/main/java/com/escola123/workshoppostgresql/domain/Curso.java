@@ -7,25 +7,27 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-@Entity(name= "tb_professores")
-public class Professores implements Serializable{
+
+
+@Entity(name="tb_curso")
+public class Curso implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String address;
+	private String sigla;
 	
-	public Professores() {
-		
+	public Curso() {
 	}
 
-	public Professores(Long id, String name, String address) {
+	public Curso(Long id, String name, String sigla) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.address = address;
+		this.sigla = sigla;
 	}
 
 	public Long getId() {
@@ -44,12 +46,12 @@ public class Professores implements Serializable{
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getSigla() {
+		return sigla;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 
 	@Override
@@ -65,10 +67,11 @@ public class Professores implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Professores other = (Professores) obj;
+		Curso other = (Curso) obj;
 		return Objects.equals(id, other.id);
 	}
 
 	
 	
+
 }
