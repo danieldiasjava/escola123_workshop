@@ -1,12 +1,16 @@
 package com.escola123.workshoppostgresql.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 @Entity(name= "tb_professores")
 public class Professores implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -16,6 +20,10 @@ public class Professores implements Serializable{
 	private Long id;
 	private String name;
 	private String address;
+	
+	@ManyToOne
+	@JoinColumn(name="professor_id")
+	private Turma professor;
 	
 	public Professores() {
 		

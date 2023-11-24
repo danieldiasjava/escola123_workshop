@@ -1,12 +1,15 @@
 package com.escola123.workshoppostgresql.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity(name="tb_turma")
 public class Turma implements Serializable{
@@ -17,6 +20,9 @@ public class Turma implements Serializable{
 	private Long id;
 	private Integer semestre;
 	private Integer ano;
+	
+	@ManyToMany(mappedBy = "turmas")
+	private Set<Alunos> alunos = new HashSet<>();
 	
 	public Turma() {
 	

@@ -3,10 +3,10 @@ package com.escola123.workshoppostgresql.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.escola123.workshoppostgresql.domain.pk.CursoPK;
+
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 
 @Entity(name="tb_curso")
@@ -14,30 +14,40 @@ public class Curso implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@EmbeddedId
+	private CursoPK id;
+	
+	
 	private String name;
 	private String sigla;
 	
 	public Curso() {
 	}
 
-	public Curso(Long id, String name, String sigla) {
+	public Curso(Alunos alunos, Turma turma, String name, String sigla) {
 		super();
-		this.id = id;
+		id.setAlunos(alunos);
+		id.setTurma(turma);
 		this.name = name;
 		this.sigla = sigla;
 	}
 
-	public Long getId() {
-		return id;
+	public Alunos getAlunos() {
+		return id.getAlunos();
 	}
-
-	public void setId(Long id) {
-		this.id = id;
+	
+	public void setAlunos(Alunos alunos) {
+		id.setAlunos(alunos);
 	}
-
+	
+	public Turma getTurma() {
+		return id.getTurma();
+	}
+	
+	public void setTurma(Turma turma) {
+		id.setTurma(turma);
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -71,7 +81,6 @@ public class Curso implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 
-	
-	
+
 
 }

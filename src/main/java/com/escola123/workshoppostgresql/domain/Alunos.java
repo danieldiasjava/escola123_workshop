@@ -1,12 +1,19 @@
 package com.escola123.workshoppostgresql.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import org.hibernate.annotations.Cascade;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity (name="tb_alunos")
 public class Alunos implements Serializable{
@@ -17,6 +24,11 @@ public class Alunos implements Serializable{
 	private Long id;
 	private String name;
 	private String address;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_turma_alunos", joinColumns = @JoinColumn(name = "alunos_id"), inverseJoinColumns = @JoinColumn(name = "Turma_id"))
+	private Set<Turma> turmas = new HashSet<>();
+	
 	
 	public Alunos() {
 		
