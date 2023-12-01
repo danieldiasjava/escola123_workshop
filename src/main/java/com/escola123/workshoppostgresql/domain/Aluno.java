@@ -9,10 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-@Entity(name= "tb_professores")
-public class Professores implements Serializable{
+import jakarta.persistence.ManyToMany;
+
+@Entity (name="tb_alunos")
+public class Aluno implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -21,15 +21,15 @@ public class Professores implements Serializable{
 	private String name;
 	private String address;
 	
-	@ManyToOne
-	@JoinColumn(name="professor_id")
-	private Turma professor;
 	
-	public Professores() {
+	@ManyToMany(mappedBy = "alunos")
+	private List<Turma> turmas = new ArrayList<>();
+	
+	public Aluno() {
 		
 	}
 
-	public Professores(Long id, String name, String address) {
+	public Aluno(Long id, String name, String address) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -73,10 +73,8 @@ public class Professores implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Professores other = (Professores) obj;
+		Aluno other = (Aluno) obj;
 		return Objects.equals(id, other.id);
 	}
 
-	
-	
 }

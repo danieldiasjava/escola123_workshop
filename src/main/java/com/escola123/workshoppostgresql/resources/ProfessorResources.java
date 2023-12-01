@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.escola123.workshoppostgresql.domain.Professores;
-import com.escola123.workshoppostgresql.services.ProfessoresService;
+import com.escola123.workshoppostgresql.domain.Professor;
+import com.escola123.workshoppostgresql.services.ProfessorService;
 
 
 @RestController
 @RequestMapping(value="/professores")
-public class ProfessoresResources {
+public class ProfessorResources {
 	
 	@Autowired
-	private ProfessoresService service;
+	private ProfessorService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Professores>> findAll(){
-		List<Professores> list = service.findAll();
+	public ResponseEntity<List<Professor>> findAll(){
+		List<Professor> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Professores> insert(@RequestBody Professores profObj){
+	public ResponseEntity<Professor> insert(@RequestBody Professor profObj){
 		profObj = service.insert(profObj);
 		return ResponseEntity.ok().body(profObj);
 	}

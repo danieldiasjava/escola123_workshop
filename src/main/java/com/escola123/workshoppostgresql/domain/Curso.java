@@ -1,53 +1,56 @@
+
 package com.escola123.workshoppostgresql.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.escola123.workshoppostgresql.domain.pk.CursoPK;
-
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 
-@Entity(name="tb_curso")
+@Entity(name="tb_cursos")
 public class Curso implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	
-	@EmbeddedId
-	private CursoPK id;
-	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String name;
 	private String sigla;
+	
+	
+	@OneToOne
+	@JoinColumn(name = "aluno_id")
+	private Aluno alunos;
+	
+	@ManyToOne
+	@JoinColumn(name = "turma_id")
+	private Turma turmas;
 	
 	public Curso() {
 	}
 
-	public Curso(Alunos alunos, Turma turma, String name, String sigla) {
+	public Curso(Long id, String name, String sigla) {
 		super();
-		id.setAlunos(alunos);
-		id.setTurma(turma);
+		this.id = id;
 		this.name = name;
 		this.sigla = sigla;
 	}
 
-	public Alunos getAlunos() {
-		return id.getAlunos();
+	public Long getId() {
+		return id;
 	}
-	
-	public void setAlunos(Alunos alunos) {
-		id.setAlunos(alunos);
+
+	public void setId(Long id) {
+		this.id = id;
 	}
-	
-	public Turma getTurma() {
-		return id.getTurma();
-	}
-	
-	public void setTurma(Turma turma) {
-		id.setTurma(turma);
-	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -80,7 +83,5 @@ public class Curso implements Serializable{
 		Curso other = (Curso) obj;
 		return Objects.equals(id, other.id);
 	}
-
-
 
 }

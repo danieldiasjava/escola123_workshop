@@ -1,22 +1,14 @@
 package com.escola123.workshoppostgresql.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import org.hibernate.annotations.Cascade;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-
-@Entity (name="tb_alunos")
-public class Alunos implements Serializable{
+@Entity(name= "tb_professores")
+public class Professor implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -25,16 +17,11 @@ public class Alunos implements Serializable{
 	private String name;
 	private String address;
 	
-	@ManyToMany
-	@JoinTable(name = "tb_turma_alunos", joinColumns = @JoinColumn(name = "alunos_id"), inverseJoinColumns = @JoinColumn(name = "Turma_id"))
-	private Set<Turma> turmas = new HashSet<>();
-	
-	
-	public Alunos() {
+	public Professor() {
 		
 	}
 
-	public Alunos(Long id, String name, String address) {
+	public Professor(Long id, String name, String address) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -78,8 +65,10 @@ public class Alunos implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Alunos other = (Alunos) obj;
+		Professor other = (Professor) obj;
 		return Objects.equals(id, other.id);
 	}
 
+	
+	
 }

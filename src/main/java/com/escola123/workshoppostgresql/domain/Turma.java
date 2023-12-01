@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity(name="tb_turma")
@@ -21,8 +23,12 @@ public class Turma implements Serializable{
 	private Integer semestre;
 	private Integer ano;
 	
-	@ManyToMany(mappedBy = "turmas")
-	private Set<Alunos> alunos = new HashSet<>();
+	
+	@ManyToMany
+	@JoinTable(name = "tb_aluno_turma", joinColumns = @JoinColumn(name="turma_id"), 
+	inverseJoinColumns = @JoinColumn(name="aluno_id"))
+	private Set<Aluno> alunos = new HashSet<>();
+	
 	
 	public Turma() {
 	
