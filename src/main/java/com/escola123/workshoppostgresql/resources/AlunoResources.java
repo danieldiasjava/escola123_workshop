@@ -16,39 +16,39 @@ import org.springframework.web.bind.annotation.RestController;
 import com.escola123.workshoppostgresql.domain.Aluno;
 import com.escola123.workshoppostgresql.services.AlunoService;
 
-
 @RestController
-@RequestMapping(value="/alunos")
+@RequestMapping(value = "/alunos")
 public class AlunoResources {
-	
+
 	@Autowired
 	private AlunoService service;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Aluno>> findAll(){
+	public ResponseEntity<List<Aluno>> findAll() {
 		List<Aluno> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Aluno> findById(@PathVariable Long id){
+	public ResponseEntity<Aluno> findById(@PathVariable Long id) {
 		Aluno obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<Aluno> insert(@RequestBody Aluno alunosObj){
+	public ResponseEntity<Aluno> insert(@RequestBody Aluno alunosObj) {
 		alunosObj = service.insert(alunosObj);
 		return ResponseEntity.ok().body(alunosObj);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Aluno> update(@PathVariable Long id, @RequestBody Aluno obj){
+	public ResponseEntity<Aluno> update(@PathVariable Long id, @RequestBody Aluno obj) {
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}

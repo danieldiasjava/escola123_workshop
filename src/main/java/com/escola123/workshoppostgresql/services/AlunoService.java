@@ -12,30 +12,30 @@ import com.escola123.workshoppostgresql.services.exception.ObjectNotFoundExcepti
 
 @Service
 public class AlunoService {
-	
+
 	@Autowired
 	private AlunoRepository alunoRepository;
-	
-	public List<Aluno> findAll(){
+
+	public List<Aluno> findAll() {
 		return alunoRepository.findAll();
 	}
-	
+
 	public Aluno findById(Long id) {
 		Optional<Aluno> obj = alunoRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Id nao encontrado"));
-		
+
 	}
 
 	public Aluno insert(Aluno alunosObj) {
-	
+
 		return alunoRepository.save(alunosObj);
 	}
-	
+
 	public void delete(Long id) {
 		findById(id);
 		alunoRepository.deleteById(id);
 	}
-	
+
 	public Aluno update(Long id, Aluno obj) {
 		Aluno entity = alunoRepository.getReferenceById(id);
 		updateData(entity, obj);
@@ -45,7 +45,7 @@ public class AlunoService {
 	private void updateData(Aluno entity, Aluno obj) {
 		entity.setName(obj.getName());
 		entity.setAddress(obj.getAddress());
-		
+
 	}
 
 }
