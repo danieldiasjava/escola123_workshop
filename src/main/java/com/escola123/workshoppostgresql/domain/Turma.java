@@ -29,6 +29,9 @@ public class Turma implements Serializable{
 	inverseJoinColumns = @JoinColumn(name="aluno_id"))
 	private Set<Aluno> alunos = new HashSet<>();
 	
+	@ManyToMany(mappedBy = "turmas")
+	public Set<Professor> professores = new HashSet<>();
+	
 	
 	public Turma() {
 	
